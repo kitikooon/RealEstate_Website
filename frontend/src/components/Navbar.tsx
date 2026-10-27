@@ -12,7 +12,7 @@ const LINKS = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/40 bg-white/60 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="text-xl font-bold tracking-tight text-navy">
           Real<span className="text-slate-500">Estate</span>
