@@ -1,66 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 
-const LINKS = [
-  { href: "/search?listingType=Sale", label: "ซื้อ" },
-  { href: "/search?listingType=Rent", label: "เช่า" },
-  { href: "/search", label: "ขายอสังหาริมทรัพย์" },
+// Only Thai is available for now; the other languages are placeholders for a later phase.
+const LANGS = [
+  { code: "th", label: "ไทย", available: true },
+  { code: "en", label: "EN", available: false },
+  { code: "zh", label: "中文", available: false },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  // On the home page the bar floats transparently over the hero image; elsewhere it is a solid sticky bar.
+  const overHero = usePathname() === "/";
+
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold tracking-tight text-navy">
-          Real<span className="text-slate-500">Estate</span>
+    <header
+      className={
+        overHero
+          ? "absolute inset-x-0 top-0 z-40 text-white"
+          : "sticky top-0 z-40 border-b border-white/40 bg-white/60 text-navy backdrop-blur-xl"
+      }
+    >
+      <nav className="flex h-16 w-full items-center justify-between px-5 md:px-12">
+        <Link href="/" className="font-[family-name:var(--font-serif)] text-2xl font-medium tracking-tight">
+          Plot<em className="font-normal opacity-70">line</em>
         </Link>
-        <ul className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <li key={l.label}>
-              <Link href={l.href} className="text-sm font-medium text-slate-700 hover:text-navy">
+        <ul className="flex items-center gap-5 text-sm">
+          {LANGS.map((l) => (
+            <li key={l.code}>
+              <button
+                type="button"
+                disabled={!l.available}
+                title={l.available ? undefined : "เร็ว ๆ นี้"}
+                aria-current={l.available ? "true" : undefined}
+                className={`pb-0.5 disabled:cursor-not-allowed ${
+                  l.available ? "border-b border-current font-medium" : "opacity-60"
+                }`}
+              >
                 {l.label}
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-2">
-          {/* Membership is a later phase; this button is a placeholder, not a working login. */}
-          <button
-            type="button"
-            disabled
-            title="ระบบสมาชิกจะเปิดใช้งานในระยะถัดไป"
-            className="hidden rounded-md bg-navy px-4 py-2 text-sm font-medium text-white opacity-90 disabled:cursor-not-allowed md:block"
-          >
-            เข้าสู่ระบบ
-          </button>
-          <button
-            type="button"
-            aria-label="เมนู"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="rounded-md p-2 text-slate-700 md:hidden"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
       </nav>
-      {open && (
-        <ul className="border-t border-slate-100 bg-white px-4 py-2 md:hidden">
-          {LINKS.map((l) => (
-            <li key={l.label}>
-              <Link href={l.href} onClick={() => setOpen(false)} className="block py-3 text-sm font-medium text-slate-700">
-                {l.label}
-              </Link>
-            </li>
-          ))}
-          <li className="py-3 text-sm text-slate-400">เข้าสู่ระบบ (เร็ว ๆ นี้)</li>
-        </ul>
-      )}
     </header>
   );
 }

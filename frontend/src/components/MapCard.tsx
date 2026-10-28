@@ -9,7 +9,7 @@ interface Props {
   onSelect: (id: number) => void;
 }
 
-const chip = "rounded-full bg-white/70 px-2.5 py-1 text-xs font-medium text-slate-700";
+const chip = "rounded-full bg-white/30 px-2.5 py-1 text-xs font-medium text-slate-700";
 
 /** Floating glass card shown in the map's bottom rail. */
 export default function MapCard({ property: p, selected, onSelect }: Props) {
@@ -17,9 +17,8 @@ export default function MapCard({ property: p, selected, onSelect }: Props) {
     <article
       data-card-id={p.id}
       onClick={() => onSelect(p.id)}
-      className={`relative flex w-[320px] shrink-0 cursor-pointer snap-start overflow-hidden rounded-[28px] border bg-white/70 shadow-xl backdrop-blur-xl transition ${
-        selected ? "border-black ring-2 ring-black" : "border-white/60 hover:bg-white/80"
-      }`}
+      className={`relative flex w-[320px] shrink-0 cursor-pointer snap-start overflow-hidden rounded-[28px] border bg-white/20 shadow-xl backdrop-blur-xl transition ${selected ? "border-black ring-2 ring-black" : "border-white/60 hover:bg-white/35"
+        }`}
     >
       <div className="relative w-[120px] shrink-0 bg-slate-200">
         {p.coverImage && (
@@ -36,12 +35,12 @@ export default function MapCard({ property: p, selected, onSelect }: Props) {
       <div className="min-w-0 flex-1 p-3.5">
         <div className="flex items-start gap-2">
           <span
-            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/80"
+            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/30"
             dangerouslySetInnerHTML={{ __html: iconSvg(p.propertyType, 16) }}
           />
           <div className="min-w-0 flex-1 pr-8">
             <h3 className="line-clamp-1 text-sm font-semibold text-slate-900">{p.title}</h3>
-            <p className="line-clamp-1 text-xs text-slate-500">
+            <p className="line-clamp-1 text-xs text-slate-600">
               {p.district}, {p.province}
             </p>
           </div>

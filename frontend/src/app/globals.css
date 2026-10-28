@@ -14,6 +14,7 @@
   --color-navy: var(--navy);
   --color-navy-soft: var(--navy-soft);
   --font-sans: var(--font-sarabun), var(--font-geist-sans), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 }
 
 body {
@@ -22,6 +23,26 @@ body {
   font-family: var(--font-sans);
 }
 
+
+/* Slow, smooth zoom in and out on the home hero image (the hero section clips the overflow) */
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-zoom {
+  animation: hero-zoom 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom { animation: none; }
+}
+
+/* Translucent inputs for the hero search card */
+.glass-form input,
+.glass-form select {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(148, 163, 184, 0.35);
+}
 
 /* Map pins (created imperatively by MapView) */
 .pin { position: relative; background: none; border: 0; padding: 0; cursor: pointer; }

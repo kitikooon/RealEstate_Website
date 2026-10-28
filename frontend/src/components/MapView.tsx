@@ -313,6 +313,13 @@ export default function MapView({ items, selectedId, onSelect, onBoundsChange, f
           el.addEventListener("click", (ev) => {
             ev.stopPropagation();
             callbacks.current.onSelect(item.id);
+            map?.flyTo({
+              center: [item.longitude, item.latitude],
+              zoom: Math.max(map.getZoom(), 16),
+              pitch: provider.supports3D ? 60 : 0,
+              duration: 1200,
+              padding: { bottom: Math.min(200, map.getContainer().clientHeight * 0.25) },
+            });
           });
         }
         const marker = new ml.Marker({ element: el, anchor: "center" }).setLngLat([lng, lat]).addTo(map);
