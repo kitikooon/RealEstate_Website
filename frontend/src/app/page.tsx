@@ -1,33 +1,60 @@
+import Image from "next/image";
 import Link from "next/link";
-import FeaturedProperties from "@/components/FeaturedProperties";
-import HeroSearch from "@/components/HeroSearch";
+import FeatureShowcase from "@/components/FeatureShowcase";
 
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-white px-4 pb-16 pt-14 text-navy md:pb-24 md:pt-20">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-sky-200/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <h1 className="text-3xl font-semibold leading-tight tracking-tight md:text-5xl">ค้นหาบ้านในฝันของคุณบนแผนที่ 3D</h1>
-          <p className="mx-auto mb-8 mt-4 max-w-2xl font-light text-slate-500">
-            บ้าน คอนโด ทาวน์โฮม ที่ดิน และอาคารพาณิชย์ ปักหมุดตามพิกัดจริง ค้นหาตามพื้นที่บนแผนที่ได้ทันที
+      <section className="relative flex min-h-dvh items-center overflow-hidden px-4 pb-16 pt-28 text-white">
+        <Image
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2000&q=75"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero-zoom object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 to-transparent" />
+
+        <div className="relative mx-auto w-full max-w-6xl">
+          <p className="mb-6 text-base tracking-wide text-white/80 md:text-xl">บ้านและคอนโด ซื้อ เช่า ทั่วประเทศไทย</p>
+          <h1 className="font-[family-name:var(--font-serif)] text-6xl leading-[1.05] tracking-tight md:text-8xl lg:text-9xl">
+            Find a home,
+            <br />
+            <em className="text-amber-100/90">chosen with care.</em>
+          </h1>
+          <p className="mt-8 max-w-3xl text-lg font-light text-white/85 md:text-2xl md:leading-relaxed">
+            ค้นหาบ้าน คอนโด ทาวน์โฮม และที่ดิน ปักหมุดตามพิกัดจริงบนแผนที่ 3D ดูราคาและทำเลได้ในมุมมองเดียว
           </p>
+          <div className="mt-10 flex flex-wrap items-center gap-6">
+            <Link href="/search" className="rounded-md bg-white px-9 py-4 text-lg font-semibold text-navy hover:bg-white/90">
+              เปิดแผนที่ค้นหา →
+            </Link>
+            <Link
+              href="/compare"
+              className="rounded-md border border-white/70 px-9 py-4 text-lg font-semibold text-white backdrop-blur-sm hover:bg-white/15"
+            >
+              เปรียบเทียบ
+            </Link>
+            <a href="#features" className="border-b border-white/60 pb-0.5 text-base text-white/90 hover:border-white md:text-lg">
+              ดูวิธีใช้งาน ↓
+            </a>
+          </div>
         </div>
-        <HeroSearch />
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-14">
-        <div className="mb-6 flex items-end justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-navy">ประกาศแนะนำ</h2>
-            <p className="text-sm text-slate-500">ประกาศล่าสุดจากทั่วประเทศ</p>
+      <section id="features" className="scroll-mt-0 bg-[#f4f1ec] px-4 py-20 text-stone-900 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="max-w-3xl text-4xl font-medium leading-tight tracking-tight md:text-6xl md:leading-[1.15]">
+            เลือกบ้านจากทำเลจริง
+            <br />
+            ไม่ใช่แค่รูปถ่าย
+          </h2>
+          <div className="mt-14 md:mt-20">
+            <FeatureShowcase />
           </div>
-          <Link href="/search" className="text-sm font-medium text-navy hover:underline">
-            ดูทั้งหมด →
-          </Link>
         </div>
-        <FeaturedProperties />
       </section>
 
       <section className="bg-slate-50 px-4 py-14">

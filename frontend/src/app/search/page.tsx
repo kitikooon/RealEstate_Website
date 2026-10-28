@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import SearchClient from "@/components/SearchClient";
 
-export const metadata = { title: "ค้นหาอสังหาริมทรัพย์บนแผนที่ | RealEstate" };
+export const metadata = { title: "ค้นหาอสังหาริมทรัพย์บนแผนที่ | Plotline" };
 
 export default function SearchPage() {
   return (
