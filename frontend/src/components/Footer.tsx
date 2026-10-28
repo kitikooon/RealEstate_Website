@@ -3,7 +3,9 @@ export default function Footer() {
     <footer className="bg-slate-800 text-slate-300">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-3">
         <div>
-          <div className="text-lg font-bold text-white">RealEstate</div>
+          <div className="font-[family-name:var(--font-serif)] text-2xl text-white">
+            Plot<em className="text-slate-400">line</em>
+          </div>
           <p className="mt-2 text-sm text-slate-400">แพลตฟอร์มค้นหาอสังหาริมทรัพย์ผ่านแผนที่ 3D</p>
         </div>
         <div className="text-sm">
@@ -20,7 +22,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-slate-700 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} RealEstate
+        © {new Date().getFullYear()} Plotline
       </div>
     </footer>
   );

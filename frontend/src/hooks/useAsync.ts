@@ -20,13 +20,20 @@ export function useAsync<T>(fn: (signal: AbortSignal) => Promise<T>, key: string
 
   useEffect(() => {
     const ctrl = new AbortController();
-    fn(ctrl.signal)
-      .then((data) => setSettled({ key, data, error: null }))
-      .catch((e: unknown) => {
-        if (e instanceof DOMException && e.name === "AbortError") return;
-        setSettled({ key, data: null, error: e instanceof Error ? e.message : "เกิดข้อผิดพลาด" });
-      });
-    return () => ctrl.abort();
+    // Defer the request one tick so an effect that is cleaned up immediately (React Strict Mode in dev,
+    // or a quick key change) never sends a request that would just be cancelled.
+    const timer = setTimeout(() => {
+      fn(ctrl.signal)
+        .then((data) => setSettled({ key, data, error: null }))
+        .catch((e: unknown) => {
+          if (e instanceof DOMException && e.name === "AbortError") return;
+          setSettled({ key, data: null, error: e instanceof Error ? e.message : "เกิดข้อผิดพลาด" });
+        });
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+      ctrl.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 

@@ -10,7 +10,7 @@ builder.Services.AddOpenApi();
 
 var connection = builder.Configuration.GetConnectionString("Default")
     ?? throw new InvalidOperationException("ConnectionStrings:Default is not configured.");
-builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(connection));
+builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(connection));
 builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 var origins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
